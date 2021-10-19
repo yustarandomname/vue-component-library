@@ -1,26 +1,50 @@
 import Avatar from "./Avatar.vue";
 
+const code = `
+// size = 'small' | 'medium' | 'large'
+// alt = 'alt text'
+// src = 'url'
+// align = 'left' | 'top' | 'right' | 'bottom'
+<Avatar :size="size" :alt="alt" :src="src" :align="align">
+  <p>{{title}}</p>
+ </Avatar>
+`
+
 export default {
   title: "Example/Avatar",
-  component: Avatar
+  component: Avatar,
+  argTypes: {
+    size: {
+      options: ['small', 'medium', 'large'],
+    },
+    align: {
+      options: ['left', 'top', 'right', 'bottom'],
+      control: 'radio'
+    },
+  }
 };
 
-export const Default = () => ({
+const AvatarStory = (args) => ({
   components: { Avatar },
-  template:
-    '<Avatar/>'
+  setup() {
+    return { args };
+  },
+  template: `<Avatar v-bind="args"><p>{{args.title}}</p></Avatar>`,
 });
 
-export const Small = () => ({
-  components: { Avatar },
-  template:
-    '<Avatar size="small"/>'
-});
-
-
-export const Large = () => ({
-  components: { Avatar },
-  template:
-    '<Avatar size="large"/>'
-});
+export const Default = AvatarStory.bind({});
+Default.args = {
+  alt: "123",
+  title: "This is a title",
+  src: "https://proteus-eretes.nl/fotodir/0/0_tumb.jpg",
+  align: 'left',
+  size: 'medium',
+};
+Default.parameters = {
+  docs: {
+    source: {
+      code: code,
+    },
+  },
+}
 
