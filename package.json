@@ -55,5 +55,8 @@
     "storybook",
     "component",
     "library"
-  ]
+  ],
+  "dependencies": {
+    "@storybook/addon-essentials": "^6.3.12"
+  }
 }

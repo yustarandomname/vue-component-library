@@ -5,8 +5,16 @@ export default {
   component: SampleComponent
 };
 
-export const Default = () => ({
+const SampleComponentStory = (args) => ({
   components: { SampleComponent },
-  template:
-    '<SampleComponent header="blah blah blah!" text="bodytext"/>'
+  setup() {
+    return { args };
+  },
+  template: `<SampleComponent v-bind="args" />`,
 });
+
+export const Default = SampleComponentStory.bind({});
+Default.args = {
+  header: "blah blah blah!!",
+  text: "bodytext!!"
+};
