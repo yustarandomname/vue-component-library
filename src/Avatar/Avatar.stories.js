@@ -16,6 +16,7 @@ export default {
   argTypes: {
     size: {
       options: ['small', 'medium', 'large'],
+      control: 'radio'
     },
     align: {
       options: ['left', 'top', 'right', 'bottom'],
