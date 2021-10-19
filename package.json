@@ -1,7 +1,7 @@
 {
   "name": "webcie-vcl",
-  "version": "1.0.1",
-  "description": "A Vue component library skeleton using TypeScript, Rollup and Storybook",
+  "version": "1.0.2",
+  "description": "A Vue component library using TypeScript, Rollup and Storybook",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "files": [

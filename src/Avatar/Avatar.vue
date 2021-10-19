@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, computed } from "vue";
+import { defineComponent, computed } from "vue";
 
 type AvatarSize = "small" | "medium" | "large";
 type AvatarAlign = "left" | "right" | "top" | "bottom";
@@ -15,19 +15,19 @@ const defaultSrc = "https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbh
 export default defineComponent({
   props: {
     src: {
-      type: String as PropType<string>,
+      type: String,
       default: defaultSrc,
     },
     alt: {
-      type: String as PropType<string>,
+      type: String,
       default: "avatar",
     },
     size: {
-      type: String as PropType<AvatarSize>,
+      type: String,
       default: "medium",
     },
     align: {
-      type: String as PropType<AvatarAlign>,
+      type: String,
       default: "left",
     },
   },
