@@ -1,8 +1,12 @@
 <script lang="ts">
 import { defineComponent, ref, Ref, reactive, watch, onMounted } from "vue";
+import Button from "../Button/Button.vue";
 
 export default defineComponent({
   name: "InfiniteList",
+  components: {
+    Button,
+  },
   props: {
     title: {
       type: String,
@@ -26,18 +30,14 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const list: Ref<any[]> = ref([]);
-    const loading = reactive({
-      init: true,
-      page: false,
-    });
+    const loading = ref(props.initCount);
 
     watch(list, () => {
-      loading.init = false;
-      loading.page = false;
+      loading.value = 0;
     });
 
     const loadMore = () => {
-      loading.page = true;
+      loading.value = props.pageCount;
       emit("fetch", list, props.pageCount);
     };
 
@@ -45,16 +45,20 @@ export default defineComponent({
       emit("fetch", list, props.initCount);
 
       if (props.autoLoad) {
+        console.log("auto load");
         window.addEventListener("scroll", () => {
-          if (loading.page) return;
+          if (!!loading.value) return;
           const scrollTop = window.innerHeight + window.scrollY;
           const height = document.body.offsetHeight;
-          if (scrollTop >= height - props.bottomOffset) {
-            loadMore();
-          }
+
+          if (scrollTop < height - props.bottomOffset) return;
+
+          loadMore();
         });
       }
     });
+
+    return { list, loading, loadMore };
   },
 });
 </script>
@@ -63,24 +67,16 @@ export default defineComponent({
   <div class="list">
     <div v-if="title" class="title">{{ title }}</div>
 
-    <div v-for="(item, index) in list" :key="index" :class="{ first: index == 0 }" class="card">
+    <section v-for="(item, index) in list" :key="index" class="card">
       <slot v-bind:item="item"> {{ item }}</slot>
-    </div>
+    </section>
 
-    <div v-if="loading.init" class="loading">
-      <div v-for="(item, index) in new Array(initCount)" :class="{ first: index == 0 }" :key="item" class="card">
-        <slot name="loading" />
-      </div>
-    </div>
-
-    <div v-if="loading.page" class="loading">
-      <div v-for="item in new Array(pageCount)" :key="item" class="card">
-        <slot name="loading" />
-      </div>
-    </div>
+    <section v-for="item in new Array(loading)" :key="item" class="card">
+      <slot name="loading" />
+    </section>
 
     <div class="loadMore">
-      <Button @click="loadMore" :loading="loading.page || loading.init">Meer laden</Button>
+      <Button @click="loadMore" :loading="!!loading">Meer laden</Button>
     </div>
   </div>
 </template>
@@ -111,6 +107,7 @@ export default defineComponent({
 .loadMore {
   display: flex;
   justify-content: center;
+  margin-top: var(--margin-large);
 }
 
 /* MEDIA QUERIES */
@@ -126,8 +123,11 @@ export default defineComponent({
     padding: var(--padding-huge);
     border-radius: 0;
   }
-  .list .card.first {
+  .list .card:first-of-type {
     border-radius: var(--corner-radius-large) var(--corner-radius-large) 0 0;
+  }
+  .list .card:last-of-type {
+    border-radius: 0 0 var(--corner-radius-large) var(--corner-radius-large);
   }
   .list .card:not(:last-child) {
     border-bottom: 2px solid var(--grey-color-200);

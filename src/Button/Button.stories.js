@@ -44,8 +44,8 @@ Default.args = {
   icon: mdiAbTesting,
   loading: false,
   disabled: false,
-  background: "",
-  color: "",
+  background: "red",
+  color: "white",
   customBackground: false,
 }
 Default.parameters = {

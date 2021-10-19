@@ -1,8 +1,16 @@
 import InfiniteList from "./InfiniteList.vue";
 
 const template = `
-<InfiniteList v-bind="args">
+<InfiniteList v-bind="args" @fetch="fetchItems">
+<template #default="card">
+  <div class="card">
+    {{ card}}
+  </div>
+</template>
 
+  <template #loading>
+    <div>Loading...</div>
+  </template>
 </InfiniteList>
 `
 
@@ -14,26 +22,28 @@ export default {
 const InfiniteListStory = (args) => ({
   components: { InfiniteList },
   setup() {
-    // const fetchItems = async (list, amount) => {
-    //   const cards = new Array(amount).fill(0).map((_, i) => {
-    //     return {
-    //       id: i,
-    //     }
-    //   });
-    //   await new Promise((resolve) => setTimeout(resolve, 2000));
-    //   list = list.concat(cards);
-    // }
+    const fetchItems = async (list, amount) => {
+      const cards = new Array(amount).fill("Loaded").map(() => {
+        return {
+          id: Math.floor(Math.random() * 10000),
+          title: "Card",
+        }
+      })
+      await new Promise((resolve) => setTimeout(resolve, args.delay));
+      list.value = [...list.value, ...cards];
+    }
 
-    return { args };
+    return { args, fetchItems };
   },
-  template
+  template: template,
 })
 
-export const Default = InfiniteListStory({});
+export const Default = InfiniteListStory.bind({});
 Default.args = {
   title: "Infinite list",
   initCount: 10,
-  pageCount: 10,
+  pageCount: 5,
   autoLoad: true,
   bottomOffset: 400,
+  delay: 2000,
 }
