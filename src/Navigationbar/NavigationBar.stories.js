@@ -8,14 +8,11 @@ const code = `
 </NavigationBar>
 `
 
-const template = `
-<NavigationBar v-bind="args" />
-`
+const template = `<NavigationBar v-bind="args" />`
 
 export default {
-  title: "Example/navigation bar",
+  title: "Example/Navigation bar",
   component: NavigationBar,
-  decorators: [() => ({ template: '<div style="height: 600vh"><story/></div>' })],
 };
 
 const NavigationBarStory = (args) => ({
