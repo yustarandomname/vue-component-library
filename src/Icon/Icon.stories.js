@@ -11,7 +11,11 @@ export default {
     flip: {
       options: ["horizontal", "vertical", "h", "v", "none"],
       control: 'radio'
-    }
+    },
+    rotate: {
+      control: { type: 'range', min: 0, max: 360 }
+    },
+    onClick: { action: 'clicked' }
   }
 };
 
@@ -20,7 +24,7 @@ const IconStory = (args) => ({
   setup() {
     return { args }
   },
-  template: `<Icon :icon="mdiAbTesting" v-bind="args" />`
+  template: `<Icon :style="{'--color':args.color}" :icon="mdiAbTesting" v-bind="args" />`
 })
 
 export const Default = IconStory.bind({});
@@ -29,7 +33,8 @@ Default.args = {
   size: "1em",
   flip: "",
   rotate: 0,
-  spin: false
+  spin: false,
+  color: "black"
 }
 Default.parameters = {
   docs: {
