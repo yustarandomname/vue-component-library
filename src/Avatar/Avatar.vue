@@ -45,6 +45,8 @@ export default defineComponent({
 </script>
 
 <style scoped>
+@import "../main.css";
+
 .avatar {
   position: relative;
   display: flex;
