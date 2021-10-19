@@ -8,5 +8,5 @@ export default {
 export const Default = () => ({
   components: { SampleComponent },
   template:
-    '<SampleComponent headingText="blah blah blah!" bodyText="bodytext">'
+    '<SampleComponent header="blah blah blah!" text="bodytext"/>'
 });

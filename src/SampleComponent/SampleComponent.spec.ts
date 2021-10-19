@@ -6,7 +6,7 @@ describe("SampleComponent", () => {
     const header = "header text";
     const body = "body text";
     const wrapper = shallowMount(SampleComponent, {
-      props: { headingText: header, bodyText: body }
+      props: { header: header, text: body },
     });
 
     const headerText = wrapper.find("h2");

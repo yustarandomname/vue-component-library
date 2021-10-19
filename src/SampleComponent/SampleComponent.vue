@@ -1,23 +1,19 @@
 <template>
   <div class="sample-component-container">
-    <h2>{{ headingText }}</h2>
-    <p>{{ bodyText }}</p>
+    <h2>{{ header }}</h2>
+    <p>{{ text }}</p>
   </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
+import { defineComponent } from "vue";
 
-@Options({
+export default defineComponent({
   props: {
-    headingText: String,
-    bodyText: String
-  }
-})
-export default class SampleComponent extends Vue {
-  headingText = "";
-  bodyText = "";
-}
+    header: String,
+    text: String,
+  },
+});
 </script>
 
 <style scoped>
