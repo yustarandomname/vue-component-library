@@ -46,7 +46,6 @@ export default defineComponent({
 
 <style scoped>
 @import "../main.css";
-
 .avatar {
   position: relative;
   display: flex;
@@ -55,7 +54,7 @@ export default defineComponent({
   width: var(--width, fit-content);
   margin: var(--margin, 0);
 }
-img {
+.avatar img {
   height: 3rem;
   width: 3rem;
   cursor: pointer;
@@ -63,29 +62,27 @@ img {
   border: 1px solid var(--grey-color-200);
 }
 
-.size-large > img {
+/* Size */
+.avatar.size-large > img {
   height: 4rem;
   width: 4rem;
 }
-
-.size-small > img {
+.avatar.size-small > img {
   height: 2rem;
   width: 2rem;
 }
-
-.size-small {
+.avatar.size-small {
   font-size: 0.8rem;
 }
 
-.align-right {
+/* Align */
+.avatar.align-right {
   flex-direction: row-reverse;
 }
-
-.align-top {
+.avatar.align-top {
   flex-direction: column;
 }
-
-.align-bottom {
+.avatar.align-bottom {
   flex-direction: column-reverse;
 }
 </style>
