@@ -63,6 +63,7 @@ export default defineComponent({
 </template>
 
 <style scoped>
+@import "./../main.css";
 button {
   --color: var(--grey-color-200);
   --bg: var(--grey-color-900);

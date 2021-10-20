@@ -21,6 +21,7 @@ export default defineComponent({
 </template>
 
 <style scoped>
+@import "../main.css";
 .grid {
   width: var(--width, 40rem);
   max-width: var(--max-width);
